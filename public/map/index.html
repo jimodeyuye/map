@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>百度地图api</title>
+    <script src="../lib/jquery/jquery.1.11.min.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/baidumap.js"></script>
+    <style>
+
+        .map-dialog {
+            height:100%;
+            border:1px solid red;
+            background-color:#FFFFFF;
+        }
+
+    </style>
+</head>
+<body>
+
+
+
+<input type="button" id="startMonitoring" value="SET 监控 Data">
+<input type="button" id="setMonitoringData" value="SET 监控 Data">
+<input type="button" id="setMonitoringData2" value="SET 监控 Data-追加">
+时间间隔
+<select id="interval" name="interval">
+    <option value="10">10 秒</option>
+    <option value="20">20 秒</option>
+    <option value="30">30 秒</option>
+    <option value="40">40 秒</option>
+</select>
+<input type="button" value="刷新" id="refreshData">
+<span id="count"></span>
+<input type="button" value="开始" id="start">
+<input type="button" value="停止" id="stop">
+<div id="mapContent1" style="width: 1500px; height: 400px;"></div>
+<input type="button" id="startMonitoring_2" value="SET 监控 Data">
+<input type="button" id="setMonitoringData_2" value="SET 监控 Data">
+<input type="button" id="setMonitoringData2_2" value="SET 监控 Data-追加">
+<div id="mapContent2" style="width: 1500px; height: 500px;"></div>
+
+
+</body>
+
+<script>
+
+    var mgData = [
+        {
+            car:{//返回的数据格式（）
+                vin: "XSFWU2424423DWE",	//车架号
+                carName: "长江七号"        //车名
+            },
+            dataPoint:[ //存放返回来的数据点
+                {   lng:106.499673, //经度
+                    lat:29.579541,   //纬度
+                    location: "重庆澄溪",   //位置
+                    speed:"20km/h",     //速度
+                    electricity: "2A"   //电流
+                },
+                {   lng:106.543367, //经度
+                    lat:29.502619,   //纬度
+                    location: "重庆澄溪",   //位置
+                    speed:"20km/h",     //速度
+                    electricity: "2A"   //电流
+                },
+                {   lng:106.59396, //经度
+                    lat:29.639831,   //纬度
+                    location: "重庆澄溪",   //位置
+                    speed:"20km/h",     //速度
+                    electricity: "2A"   //电流
+                }
+            ]
+        },
+        {
+            car:{//返回的数据格式（）
+                vin: "XSFWU2424423DWE222",	//车架号
+                carName: "长江七号222"        //车名
+            },
+            dataPoint:[ //存放返回来的数据点
+                {   lng:111.884045, //经度
+                    lat:30.5124,   //纬度
+                },
+                {   lng:112.242792, //经度
+                    lat:27.905942,   //纬度
+                },
+                {   lng:118.58986, //经度
+                    lat:28.35447,   //纬度
+                }
+            ]
+        }
+    ];
+  $(function(){
+      $("#startMonitoring").click(function () {
+          //['XSFWU2424423DWE','XSFWU2424423DWE222']
+          bm1.startMonitoring(['XSFWU2424423DWE','XSFWU2424423DWE222'],function () {})
+      });
+      $("#setMonitoringData").click(function () {
+          bm1.setMonitoringData(mgData);
+      });
+      $("#setMonitoringData2").click(function () {
+          bm1.setMonitoringData({
+              car:{//返回的数据格式（）
+                  vin: "XSFWU2424423DWE",	//车架号
+                  carName: "长江七号"        //车名
+              },
+              dataPoint:[ //存放返回来的数据点
+                  {   lng:106.817602, //经度
+                      lat:29.506643,   //纬度
+                      location: "重庆澄溪",   //位置
+                      speed:"20km/h",     //速度
+                      electricity: "2A"   //电流
+                  },
+                  {   lng:106.726765, //经度
+                      lat:29.328951,   //纬度
+                      location: "重庆澄溪",   //位置
+                      speed:"20km/h",     //速度
+                      electricity: "2A"   //电流
+                  },
+                  {   lng:106.255334, //经度
+                      lat:29.275028,   //纬度
+                      location: "重庆澄溪",   //位置
+                      speed:"20km/h",     //速度
+                      electricity: "2A"   //电流
+                  }
+              ]
+          });
+      });
+  });
+
+
+
+$(function(){
+    $("#startMonitoring_2").click(function () {
+        bm2.startMonitoring("XSFWU2424423DWE",function () {})
+    });
+    $("#setMonitoringData_2").click(function () {
+        bm2.setMonitoringData({
+            car:{//返回的数据格式（）
+                vin: "XSFWU2424423DWE",	//车架号
+                carName: "长江七号"        //车名
+            },
+            dataPoint:[ //存放返回来的数据点
+                {   lng:102.476127, //经度
+                    lat:24.997846,   //纬度
+                    location: "重庆澄溪",   //位置
+                    speed:"20km/h",     //速度
+                    electricity: "2A"   //电流
+                }
+            ]
+        });
+    });
+    $("#setMonitoringData2_2").click(function () {
+        bm2.setMonitoringData({
+            car:{//返回的数据格式（）
+                vin: "XSFWU2424423DWE",	//车架号
+                carName: "长江七号"        //车名
+            },
+            dataPoint:[ //存放返回来的数据点
+                {   lng:103.844426, //经度
+                    lat:24.964307,   //纬度
+                },
+                {   lng:104.074392, //经度
+                    lat:26.232214,   //纬度
+                },
+                {   lng:102.970555, //经度
+                    lat:26.912567,   //纬度
+                },
+                {   lng:101.77703, //经度
+                    lat:26.617353,   //纬度
+                }
+            ]
+        });
+    });
+});
+
+var bm1 = new Map.Baidu({
+    id: "mapContent1",
+    monitoring:{
+        infoWindowCallback:function (carInfo,callback) {
+            callback(null,"<div class='map-dialog'>成功了，信息窗口</div>");
+        }
+    }
+});
+var bm2 = new Map.Baidu({
+    id: "mapContent2",
+    lag:103.865123,
+    lat:25.5186
+});
+
+</script>
+
+</html>
